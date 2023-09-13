@@ -8,11 +8,13 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import * as Express from 'express';
 import { DiscordService } from './discord/discord.service';
+import { CommandsService } from './commands/commands.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
   const discordService = app.get(DiscordService);
+  const commandsService = app.get(CommandsService);
 
   if (configService.get<string>("NODE_ENV") !== "production") {
     const swaggerConfig = new DocumentBuilder()
@@ -57,6 +59,7 @@ async function bootstrap() {
     Logger.log(`Server listening on port ${configService.get<string>("PORT")}`);
     Logger.log(`Bot invite link: ${configService.get<string>("DISCORD_BOT_INVITE")}`);
     const client = await discordService.connect();
+    await commandsService.registerCommands(client);
   });
 }
 

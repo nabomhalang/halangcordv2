@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
+import ApplicationCommand from 'src/interface/ApplicationCommand';
 
 @Injectable()
 export class DiscordService {
@@ -28,7 +29,7 @@ export class DiscordService {
       ],
     })
 
-    // this.client.commands = new Collection<string, ApplicationCommand>()
+    this.client.slashCommands = new Collection<string, ApplicationCommand>()
     // this.client.messageCommands = new Collection<string, MessageCommand>()
     // this.client.buttons = new Collection<string, DiscordButton>()
 

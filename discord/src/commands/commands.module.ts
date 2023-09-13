@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
 import { CommandsService } from './commands.service';
-import { CommandsController } from './commands.controller';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [ConfigModule],
-  providers: [CommandsService],
+  providers: [CommandsService, ConfigService],
   exports: [CommandsService],
-  controllers: [CommandsController]
 })
 export class CommandsModule { }

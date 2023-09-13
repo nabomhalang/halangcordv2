@@ -4,7 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { DiscordService } from './discord.service';
 
 @ApiTags('discord')
-@Controller('discord')
+@Controller('api/discord')
 export class DiscordController {
   constructor(private readonly discord: DiscordService, private readonly config: ConfigService) { }
 
